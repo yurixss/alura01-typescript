@@ -1,4 +1,4 @@
-import { ListContainer } from "./styles"
+import './styles.scss'
 
 export function List () {
     const tarefas = [
@@ -25,12 +25,12 @@ export function List () {
     ]
 
     return (
-        <aside>
+        <aside className='listTasks'>
 
             <h2> Estudos do Dia </h2>
             <ul>
                 {tarefas.map((item, index) => (
-                    <li key={index}>
+                    <li className='item' key={index}>
                         <h3> {item.task} </h3>
                         <span> {item.time} </span>
                     </li>
