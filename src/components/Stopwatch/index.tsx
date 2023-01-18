@@ -1,4 +1,4 @@
-import { Button } from "../Button";
+import Button from "../Button/index";
 import style from "./StopWatch.module.scss"
 import Watch from "./Watch";
 
@@ -14,9 +14,10 @@ export function StopWatch () {
                     <Watch/>
                 </div>
 
-                <Button>
-                    Start
-                </Button>
+                <Button
+                title="Adicionar"
+                />
+
             </div>
         );
 }

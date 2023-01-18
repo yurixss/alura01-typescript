@@ -1,12 +1,24 @@
 import React from "react";
-import { Button } from "../Button";
+import { ITask } from "../../types/ITask";
+import Button from "../Button/index";
 import style from './Form.module.scss'
 
-export class Form extends React.Component {
+export default class Form extends React.Component<{
+    setTask: React.Dispatch<React.SetStateAction<ITask[]>> 
+}> {
+    state = {
+        task: "",
+        time: "00:00"
+    }
 
+    saveTask(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault(),
+        this.props.setTask(oldTasks => [...oldTasks, {... this.state }]);
+    }
+    
     render () {
         return(
-            <form className={style.newTask}>
+            <form className={style.newTask} onSubmit={this.saveTask.bind(this)}>
                 <div className={style.inputContainer}>
                     <label htmlFor="tarefa">
                         Adicione um novo estudo
@@ -16,6 +28,8 @@ export class Form extends React.Component {
                     type= "Text"
                     name="Tarefa"
                     id="Tarefa"
+                    value={this.state.task}
+                    onChange={event => this.setState({...this.state, task: event.target.value})}
                     placeholder="O que voce quer estudar?"
                     required
                     />
@@ -29,6 +43,8 @@ export class Form extends React.Component {
                     type= "time"
                     step= "1"
                     name= "tempo"
+                    value={this.state.time}
+                    onChange={event => this.setState({...this.state, time: event.target.value})}
                     id= "Tempo"
                     min="00:00:00"
                     max="01:30:00"
@@ -36,7 +52,10 @@ export class Form extends React.Component {
                     />
                 </div>
                 
-                <Button/>
+                <Button 
+                type="submit"
+                title="Adicionar"
+                />
 
             </form>
         )
